@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
@@ -7,41 +6,46 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="login">
+    <div class="container">
+        <?php
+        $form = ActiveForm::begin([
+                    'id' => 'login-form',
+                    'layout' => 'horizontal',
+                    'fieldConfig' => [
+                        'template' => "{label}\n<div class=\"login-mail\">{input}</div>{error}",
+                        'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                    ],
+        ]);
+        ?>
+        <div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' => '', 'template'=>"{input}<i class=\"glyphicon glyphicon-envelope\"></i>", 'placeholder' => 'Логин'])->label(false) ?>
 
-    <p>Please fill out the following fields to login:</p>
+            <?= $form->field($model, 'password')->passwordInput(['class' => '', 'placeholder' => 'Пароль'])->label(false) ?>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+            <?=
+            $form->field($model, 'rememberMe')->checkbox([
+                'template' => "<a class=\"news-letter\" href=\"#\"> <label class=\"checkbox1\">{input}<i> </i>Forgot Password</label></a>\n<div class=\"col-lg-8\">{error}</div>",
+            ])->label('Запомнить меня')
+            ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+</div>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            <div class="col-md-6 login-do animated wow fadeInRight" data-wow-delay=".5s">
+                <label class="hvr-sweep-to-top login-sub">
+<?= Html::submitInput('Авторизация', ['class' => '', 'name' => 'login-button']) ?>
+                </label>
+                    <p>У вас нет аккаунта?</p>
+                    <a href="<?= \yii\helpers\Url::toRoute('site/signup') ?>" class="hvr-sweep-to-top">Регистрация</a>
             </div>
-        </div>
-
-    <?php ActiveForm::end(); ?>
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
+            <div class="clearfix"> </div>
+        
     </div>
 </div>
+<?php ActiveForm::end(); ?>
+		
+
+

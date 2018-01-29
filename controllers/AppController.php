@@ -15,5 +15,4 @@ use yii\web\Controller;
  * @author Вадим
  */
 class AppController extends Controller{
-   
 }

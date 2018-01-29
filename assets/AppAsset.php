@@ -18,10 +18,23 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/animate.min.css',
+        'css/flexslider.css',
+        'css/owl.carousel.css',
+        'css/style.css',
     ];
     public $js = [
+        'js/easyResponsiveTabs.js',
+        'js/imagezoom.js',
+        'js/jquery.flexisel.js',
+        'js/jquery.flexslider.js',
+        'js/jquery.slide.js',
+        'js/owl.carousel.js',
+        'js/simpleCart.min.js',
+        'js/wow.min.js',
+        'js/bootstrap-3.1.1.min.js'
     ];
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
